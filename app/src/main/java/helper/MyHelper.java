@@ -5,9 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+import android.view.View;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class MyHelper extends SQLiteOpenHelper {
 
 
 
-    public MyHelper( Context context ) {
+    public MyHelper(Context context ) {
         super(context, databaseName, null, dbVersion);
     }
 
@@ -61,6 +60,18 @@ public class MyHelper extends SQLiteOpenHelper {
         if(cursor.getCount()>0){
             while (cursor.moveToNext()){
                 dictionaryList.add(new Word(cursor.getInt(0), cursor.getString(1), cursor.getString(2)));
+            }
+        }
+        return dictionaryList;
+
+    }
+
+    public List<Word> GetWordByName(String word, SQLiteDatabase db){
+        List<Word> dictionaryList = new ArrayList<>();
+        Cursor cursor = db.rawQuery("select * from tblWord where Word ='" + word + "'", new String[]{word});
+        if (cursor.getCount() > 0){
+            while (cursor.moveToNext()){
+                dictionaryList.add(new Word(cursor.getInt(0),cursor.getString(1),cursor.getString(2)));
             }
         }
         return dictionaryList;

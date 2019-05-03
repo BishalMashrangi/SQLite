@@ -23,7 +23,7 @@ Button btnAddWord;
         etMeaning = findViewById(R.id.etMeaning);
         btnAddWord = findViewById(R.id.btnAddWord);
 
-        final MyHelper myHelper = new MyHelper(this);
+        final MyHelper myHelper = new MyHelper( this);
         final SQLiteDatabase sqLiteDatabase = myHelper.getWritableDatabase();
 
         btnAddWord.setOnClickListener(new View.OnClickListener() {
